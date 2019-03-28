@@ -1,7 +1,7 @@
 {
     "name": "${environmentName}",
     "description": "Jirafeau - a web site permitting to upload a file in a simple way and give an unique link to it",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "author": "https://github.com/etursunbaev",
     "containers": [
         {
@@ -70,9 +70,10 @@
         },
         "maxUploadsize": {
             "description": "Max Upload Size in Mb",
-            "type": "string",
+            "type": "number",
             "default": "100",
-            "validation": "[0-9]+"
+            "minimum": "0",
+            "maximum": "2000"    
         },
         "webContainerName": {
             "description": "Enter the container's hostname",
