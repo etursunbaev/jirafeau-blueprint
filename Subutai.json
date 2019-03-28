@@ -1,7 +1,7 @@
 {
     "name": "${environmentName}",
     "description": "Jirafeau - a web site permitting to upload a file in a simple way and give an unique link to it",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "https://github.com/etursunbaev",
     "containers": [
         {
@@ -12,7 +12,7 @@
             "port-mapping": [
                 {
                     "protocol": "https",
-                    "domain": "${domain_name}",
+                    "domain": "${domainName}",
                     "internal-port": "80",
                     "external-port": "443"
                 }
@@ -30,16 +30,16 @@
         "extra-vars": [
             {
                 "key": "domain_name",
-                "value": "${domain_name}"
+                "value": "${domainName}"
             }, 
             {
                 "key": "admin_pwd",
-                "value": "${admin_password}"
+                "value": "${adminPassword}"
             }
         ],
         "groups": [
             {
-                "name": "wp",
+                "name": "jbp",
                 "hostnames": [
                     "${webContainerName}"
                 ]
@@ -50,16 +50,16 @@
         "environmentName": {
             "description": "Enter the environment name",
             "type": "string",
-            "default": "wp",
+            "default": "jbp",
             "validation": "[a-zA-Z0-9]+"
         },
-        "domain_name": {
+        "domainName": {
             "description": "Enter the application domain name",
             "type": "domain",
             "default": "change.the.domain",
             "validation": "[a-zA-Z0-9]+"
         },
-        "admin_password": {
+        "adminPassword": {
             "description": "Administrator password",
             "type": "string",
             "default": "admin"
@@ -67,13 +67,13 @@
         "webContainerName": {
             "description": "Enter the container's hostname",
             "type": "string",
-            "default": "wp",
+            "default": "jbp",
             "validation": "[a-zA-Z0-9]+"
         },
         "containerSize": {
             "description": "Container Size",
             "type": "enum",
-            "default": "TINY",
+            "default": "SMALL",
             "validation": "TINY,SMALL,MEDIUM,LARGE,HUGE"
         }
     }
