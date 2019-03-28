@@ -1,7 +1,7 @@
 {
     "name": "${environmentName}",
     "description": "Jirafeau - a web site permitting to upload a file in a simple way and give an unique link to it",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "author": "https://github.com/etursunbaev",
     "containers": [
         {
