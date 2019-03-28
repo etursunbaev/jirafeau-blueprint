@@ -1,0 +1,29 @@
+<VirtualHost *:80>
+
+ServerName {{ domain_name }}
+
+DocumentRoot /var/www/jiraf/
+
+ErrorLog /var/log/jiraf_error_log
+CustomLog /var/log/jiraf_access_log combined
+
+#ScriptAlias /cgi-bin/ /home/subutai/domains/docs.subutai.io/cgi-bin/
+
+DirectoryIndex index.html index.htm index.php index.php4 index.php5
+
+<Directory /var/www/jiraf>
+Options -Indexes +IncludesNOEXEC +SymLinksIfOwnerMatch +ExecCGI
+allow from all
+AllowOverride All Options=ExecCGI,Includes,IncludesNOEXEC,Indexes,MultiViews,SymLinksIfOwnerMatch
+Require all granted
+AddType application/x-httpd-php .php
+AddHandler fcgid-script .php
+AddHandler fcgid-script .php7.0
+AddHandler fcgid-script .php7.1
+</Directory>
+
+
+#RewriteEngine on
+#RewriteCond %{HTTPS} !=on
+#RewriteRule ^/(.*) https://%{SERVER_NAME}/$1 [R=301,L]
+</VirtualHost>

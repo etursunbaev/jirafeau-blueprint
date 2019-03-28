@@ -1,0 +1,74 @@
+---
+- hosts: jbp
+  remote_user: root
+  tasks:
+    - name: Install required packages
+      apt: 
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - git
+        - php7.0
+    
+    - name: Download 
+      get_url:
+        url: https://gitlab.com/mojo42/Jirafeau/-/archive/3.4.1/Jirafeau-3.4.1.tar.gz
+        dest: /tmp/
+
+    - name: Make project folder
+      file:
+        path: /var/www/jiraf
+        state: directory
+  
+    - name: Make project folder
+      file:
+        path: /var/www/jiraf/data
+        state: directory
+
+    - name: Make project folder
+      file:
+        path: /var/www/jiraf/data/{{ item }}
+        state: directory
+      with_items:
+        - files
+        - links
+        - async
+        
+    - name: Unarchive project
+      unarchive:
+        src: /tmp/Jirafeau-3.4.1.tar.gz
+        dest: /var/www/jiraf/
+        extra_opts: [--strip-components=1]
+        remote_src: yes
+    
+    - name: Upload config file
+      template:
+        src: config.j2
+        dest: /var/www/jiraf/lib/config.local.php
+    
+    - name: Upload Apache config
+      template:
+        src: apache_config.j2
+        dest: /etc/apache2/sites-available/{{ domain_name }}.conf
+      register: config
+    
+    - name: Change ownership
+      file: 
+        path: /var/www/jiraf
+        recurse: yes
+        owner: www-data
+        group: www-data
+
+    - name: Create symlink of {{ domain_name }}.conf
+      file:
+        src: /etc/apache2/sites-available/{{ domain_name }}.conf
+        dest: /etc/apache2/sites-enabled/{{ domain_name }}.conf
+        state: link 
+        force: yes
+      register: slink
+    
+    - name: Reload apache
+      systemd:
+        name: apache2.service
+        state: reloaded
+      when: config.changed or slink.changed

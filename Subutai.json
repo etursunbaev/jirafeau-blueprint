@@ -1,0 +1,80 @@
+{
+    "name": "${environmentName}",
+    "description": "Jirafeau - a web site permitting to upload a file in a simple way and give an unique link to it",
+    "version": "1.0.0",
+    "author": "https://github.com/etursunbaev",
+    "containers": [
+        {
+            "hostname": "${webContainerName}",
+            "template": "debian-stretch",
+            "peer-criteria": "HTTP-GROUP",
+            "size": "${containerSize}",
+            "port-mapping": [
+                {
+                    "protocol": "https",
+                    "domain": "${domain_name}",
+                    "internal-port": "80",
+                    "external-port": "443"
+                }
+            ]
+        }
+    ],
+    "peer-criteria": [
+        {
+            "name": "HTTP-GROUP"
+        }
+    ],
+    "ansible-configuration": {
+        "source-url": "https://github.com/etursunbaev/jirafeau-blueprint/archive/master.zip",
+        "ansible-playbook": "site.yml",
+        "extra-vars": [
+            {
+                "key": "domain_name",
+                "value": "${domain_name}"
+            }, 
+            {
+                "key": "admin_pwd",
+                "value": "${admin_password}"
+            }
+        ],
+        "groups": [
+            {
+                "name": "wp",
+                "hostnames": [
+                    "${webContainerName}"
+                ]
+            }
+        ]
+    },
+    "user-variables": {
+        "environmentName": {
+            "description": "Enter the environment name",
+            "type": "string",
+            "default": "wp",
+            "validation": "[a-zA-Z0-9]+"
+        },
+        "domain_name": {
+            "description": "Enter the application domain name",
+            "type": "domain",
+            "default": "change.the.domain",
+            "validation": "[a-zA-Z0-9]+"
+        },
+        "admin_password": {
+            "description": "Administrator password",
+            "type": "string",
+            "default": "admin"
+        },
+        "webContainerName": {
+            "description": "Enter the container's hostname",
+            "type": "string",
+            "default": "wp",
+            "validation": "[a-zA-Z0-9]+"
+        },
+        "containerSize": {
+            "description": "Container Size",
+            "type": "enum",
+            "default": "TINY",
+            "validation": "TINY,SMALL,MEDIUM,LARGE,HUGE"
+        }
+    }
+}
