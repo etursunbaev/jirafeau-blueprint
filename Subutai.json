@@ -35,6 +35,10 @@
             {
                 "key": "admin_password",
                 "value": "${adminPassword}"
+            },
+            {
+                "key": "max_uploadsize",
+                "value": "${maxUploadsize}"
             }
         ],
         "groups": [
@@ -63,6 +67,12 @@
             "description": "Administrator password",
             "type": "string",
             "default": "admin"
+        },
+        "maxUploadsize": {
+            "description": "Max Upload Size in Mb",
+            "type": "string",
+            "default": "100",
+            "validation": "[0-9]+"
         },
         "webContainerName": {
             "description": "Enter the container's hostname",
