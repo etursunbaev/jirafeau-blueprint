@@ -25,7 +25,8 @@ Jirefeau application is a web site permitting to upload a file in a simple way a
 
 
 Wait till the application will be installed be ready
-After you can open application by your domain name address you will see such page
+After you can open application by your domain name address you will see your environment frontend page
+
 ![Screenshot from 2019-04-14 15-30-42](https://user-images.githubusercontent.com/33412152/56090941-542ab300-5eca-11e9-9575-d63cff32fa37.png)
 
 
