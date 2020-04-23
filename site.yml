@@ -36,7 +36,7 @@
         
     - name: Unarchive project
       unarchive:
-        src: /tmp/Jirafeau-3.4.1.tar.gz
+        src: /tmp/Jirafeau-4.1.1.tar.gz
         dest: /var/www/jiraf/
         extra_opts: [--strip-components=1]
         remote_src: yes
