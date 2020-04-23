@@ -8,11 +8,11 @@
         state: present
       with_items:
         - git
-        - php7.0
+        - php
     
     - name: Download 
       get_url:
-        url: https://gitlab.com/mojo42/Jirafeau/-/archive/3.4.1/Jirafeau-3.4.1.tar.gz
+        url: https://gitlab.com/mojo42/Jirafeau/-/archive/4.1.1/Jirafeau-4.1.1.tar.gz
         dest: /tmp/
 
     - name: Make project folder
