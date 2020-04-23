@@ -1,12 +1,12 @@
 {
     "name": "${environmentName}",
     "description": "Jirafeau - a web site permitting to upload a file in a simple way and give an unique link to it",
-    "version": "1.0.5",
+    "version": "2.0.0",
     "author": "https://github.com/etursunbaev",
     "containers": [
         {
             "hostname": "${webContainerName}",
-            "template": "debian-stretch",
+            "template": "debian-buster",
             "peer-criteria": "HTTP-GROUP",
             "size": "${containerSize}",
             "port-mapping": [
